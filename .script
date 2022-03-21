@@ -1,0 +1,25 @@
+#!/bin/bash
+
+if [ ! -f output.txt ]; then
+    echo "Run the scraper first"
+    exit 0
+fi
+
+cmd=$(shuf -n 1 output.txt)
+
+name=$(echo $cmd | grep -o '.*[[:space:]]-[[:space:]]')
+def=$(echo $cmd | grep -o '\-.*')
+# echo ${name%??}
+# echo ${meaning:2}
+
+RED='\033[1;33m'
+PURPLE='\033[0;35m'
+NC='\033[0m' # No Color
+bold=$(tput bold)
+normal=$(tput sgr0)
+
+printf "${bold}${RED}${name%??}${NC}\n"
+printf "${bold}${PURPLE}${def:2}${NC}\n"
+printf "\n"
+
+exit 0
